@@ -1,0 +1,82 @@
+.table-sortable .sortable {
+	cursor: pointer;
+}
+
+.table-sortable .th-sort-asc::after {
+	content: "\25b4";
+}
+
+.table-sortable .th-sort-desc::after {
+	content: "\25be";
+}
+
+.table-sortable .th-sort-asc::after,
+.table-sortable .th-sort-desc::after {
+	margin-left: 5px;
+}
+
+.table-sortable .th-sort-asc,
+.table-sortable .th-sort-desc {
+	background: rgba(0, 0, 0, 0.1);
+}
+
+.modal-body	{
+	display: inline;
+}
+
+section {
+    text-align: center
+}
+
+small {
+    color: red;
+    visibility: hidden;
+}
+
+form {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#locationInput {
+    visibility: hidden;
+}
+
+#latitudeInput {
+    visibility: hidden;
+}
+
+#longitudeInput {
+    visibility: hidden;
+}
+
+.btn-block {
+    width: 70%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.modal-footer {
+    display: block;
+    text-align: center;
+}
+
+.col-7 {
+    margin-bottom: 5px;
+}
+
+.col-4 {
+    margin-bottom: 5px;
+}
+
+.locationBody {
+    margin: 20px;
+    display: grid;
+    gap: 20px;
+}
+
+select {
+    text-align: left;
+    width: auto;
+}

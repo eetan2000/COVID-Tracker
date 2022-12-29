@@ -1,0 +1,41 @@
+header {
+    padding: 10px;
+}
+
+header p {
+    text-align: center;
+    margin-top: 10px;
+    color: rgb(107, 107, 107);
+}
+
+h1 {
+    text-align: center;
+}
+
+.map-section {
+    text-align: center;
+}
+
+section {
+    text-align: center
+}
+
+.btn-block {
+    width: 70%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.modal-footer {
+    display: block;
+    text-align: center;
+}
+
+.col-7 {
+    margin-bottom: 5px;
+}
+
+.col-4 {
+    margin-bottom: 5px;
+}
