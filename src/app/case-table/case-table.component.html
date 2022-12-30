@@ -1,6 +1,6 @@
 <!-- Create Case Button -->
 <section>
-    <button class="btn btn-primary btn-lg btn-block" type="button" #modalButton >
+    <button class="btn btn-primary btn-lg btn-block" type="button" #modalButton (click)="createCaseModal()">
         Add a new COVID case
     </button>
 </section>
@@ -12,7 +12,6 @@
             <th class="sortable">Location</th>
             <th class="sortable">Reported By</th>
             <th class="sortable">Time Reported</th>
-            <th>Status</th>
             <th></th>
             <th></th>
             <th></th>
@@ -22,3 +21,39 @@
         
     </tbody>
 </table>
+
+<!-- Create a case Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Create A New Pig</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body">
+        <br>
+        <label for="nameInput" class="form-label">Name of Patient</label>
+        <input type="text" class="form-control" id="nameInput" placeholder="ex. John Doe">
+        <br>
+        <label for="phoneInput" class="form-label">Phone Number</label>
+        <input type="text" class="form-control" id="phoneInput" placeholder="XXX-XXX-XXXX">
+        <br>
+        <label for="idInput" class="form-label">Medical ID</label>
+        <input type="number" class="form-control" id="idInput" placeholder="301370352">
+        <br>
+        <label for="infoInput" class="form-label">Condition of Patient</label>
+        <input type="text" class="form-control" id="infoInput" placeholder="ex. Dry cough">
+        <br>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-block" type="button" >Next</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Location Modal -->

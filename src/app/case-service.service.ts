@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
 })
 export class CaseServiceService {
   caseData: any = []
-  cases: Case[] = []
+  //cases: Case[] = []
   locationsData: any = []
-  locations: any[] = []
+  //locations: any[] = []
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -19,7 +19,9 @@ export class CaseServiceService {
     })
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+    
+  }
 
   getCaseObservable(): Observable<any> {
     return this.http.get<Object>('https://272.selfip.net/apps/nxRNBp1Q5H/collections/cases/documents/cases1/')
@@ -29,6 +31,7 @@ export class CaseServiceService {
     return new Promise( (resolve, reject) => {
       this.getCaseObservable()
       .subscribe( (data: any) => {
+        var casesTemp = []
         this.caseData = data
 
         let i = 0;
@@ -37,15 +40,38 @@ export class CaseServiceService {
           var phone = JSON.parse(this.caseData.data[i]).phone
           var id = JSON.parse(this.caseData.data[i]).id
           var location = JSON.parse(this.caseData.data[i]).location
+          var date = JSON.parse(this.caseData.data[i]).date
           var info = JSON.parse(this.caseData.data[i]).info
 
-          var newCase = new Case(name, phone, id, location, info)
-          this.cases.push(newCase)
+          var newCase = new Case(name, phone, id, location, date, info)
+          casesTemp.push(newCase)
           i++
         }
-
-        resolve(this.cases)
+        resolve(casesTemp)
       })
     })
   }
+
+  getLocationObservable(): Observable<any> {
+    return this.http.get<Object>('https://272.selfip.net/apps/nxRNBp1Q5H/collections/locations/documents/locations1/')
+  }
+
+  async getLocations(): Promise<any[]> {
+    return new Promise( (resolve, reject) => {
+      this.getLocationObservable()
+      .subscribe( (data: any) => {
+        var locationsTemp = []
+        this.locationsData = data
+
+        let i = 0
+        while(this.locationsData.data[i]) {
+          locationsTemp.push(JSON.parse(this.locationsData.data[i]))
+          i++
+        }
+
+        resolve(locationsTemp)
+      })
+    })
+  }
+
 }

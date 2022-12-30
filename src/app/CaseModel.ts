@@ -3,13 +3,15 @@ export class Case {
     private phone: string;
     private id: number;
     private location: string;
+    private date: string;
     private info: string;
 
-    constructor(name:string, phone:string, id:number, location:string, info:string) {
+    constructor(name:string, phone:string, id:number, location:string, date:string, info:string) {
         this.name = name;
         this.phone = phone;
         this.id = id;
         this.location = location;
+        this.date = date;
         this.info = info
     }
 
@@ -27,6 +29,10 @@ export class Case {
 
     getLocation() {
         return this.location;
+    }
+
+    getDate() {
+        return this.date;
     }
 
     getInfo() {
