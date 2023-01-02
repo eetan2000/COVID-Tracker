@@ -85,3 +85,7 @@ select {
 .table {
     margin: 0;
 }
+
+.th-selected {
+    color: #18191a;
+}

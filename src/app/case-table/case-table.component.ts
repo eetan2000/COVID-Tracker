@@ -38,11 +38,18 @@ export class CaseTableComponent implements OnInit{
     this.locations = await this.caseService.getLocations()
 
     document.querySelectorAll(".table-sortable th").forEach( (headerCell) => {
-      if(headerCell.innerHTML !== "" && headerCell.innerHTML !== "Status") {
+      if(headerCell.innerHTML !== "") {
         headerCell.addEventListener("click", () => {
+          document.querySelectorAll(".table-sortable th").forEach( (h) => {
+            h.classList.remove("th-selected")
+          } )
+
           const tableElement = headerCell.parentElement!.parentElement!.parentElement as HTMLTableElement
           const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement!.children, headerCell)
           const currentIsAscending = headerCell.classList.contains("th-sort-asc");
+          if(!currentIsAscending) {
+            headerCell.classList.add("th-selected")
+          }
 
           this.sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
         })
