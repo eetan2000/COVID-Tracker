@@ -49,7 +49,7 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-primary btn-block" type="button" >Next</button>
+        <button class="btn btn-primary btn-block" type="button" (click)="createLocationModal()">Next</button>
       </div>
 
     </div>
@@ -57,3 +57,32 @@
 </div>
 
 <!-- Location Modal -->
+<div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add a Location</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form>
+        <div class="modal-body" id="locationBody">
+          <div class="locationBody">
+            <select class="form-select" aria-label="Default select example" id="locationSelect">
+              <option value="null">Select a location</option>
+            </select>
+            <button type="button" class="btn btn-secondary" id="addLocationButton" (click)="addLocationInput()">
+              +
+            </button>
+            <input class="form-control" id="locationInput" type="text" placeholder="Location Name" required>
+            <input type="number" step="0.01" class="form-control" id="latitudeInput" placeholder="Latitude" required>
+            <input type="number" step="0.01" class="form-control" id="longitudeInput" placeholder="Longitude" required>
+            <br>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary btn-block" type="button" (click)="addCase()">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

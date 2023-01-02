@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
 })
 export class CaseServiceService {
   caseData: any = []
-  //cases: Case[] = []
+  cases: Case[] = []
   locationsData: any = []
-  //locations: any[] = []
+  locations: any[] = []
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -47,6 +47,7 @@ export class CaseServiceService {
           casesTemp.push(newCase)
           i++
         }
+        this.cases = casesTemp
         resolve(casesTemp)
       })
     })
@@ -68,10 +69,96 @@ export class CaseServiceService {
           locationsTemp.push(JSON.parse(this.locationsData.data[i]))
           i++
         }
-
+        this.locations = locationsTemp
         resolve(locationsTemp)
       })
     })
   }
+
+  putCaseObservable(newCase: Case): Observable<any> {
+    this.cases.push(newCase)
+
+    const casesJSON: Object[] = []
+    this.cases.forEach( (currentCase) => {
+      casesJSON.push(JSON.stringify(currentCase))
+    } )
+
+    return this.http.put<Object>('https://272.selfip.net/apps/nxRNBp1Q5H/collections/cases/documents/cases1/', 
+      {
+        "key": "cases1",
+        "data": casesJSON
+      }, this.httpOptions)
+  }
+
+  async addCase(newCase: Case): Promise<any> {
+    return new Promise( (resolve, reject) => {
+      this.putCaseObservable(newCase)
+      .subscribe( (data:any) => {
+        resolve(data)
+      } )
+    } )
+  }
+
+  putLocationsObservable(newLocation: any): Observable<any> {
+    this.locations.push(newLocation)
+
+    const locationsJSON: Object[] = []
+    this.locations.forEach( (currentLocation) => {
+      locationsJSON.push(JSON.stringify(currentLocation))
+    } )
+
+    return this.http.put<Object>('https://272.selfip.net/apps/nxRNBp1Q5H/collections/locations/documents/locations1/', 
+    {
+      "key": "locations1",
+      "data": locationsJSON
+    }, this.httpOptions)
+  }
+
+  putLocationsCountObservable(locationsJSON: Object[]): Observable<any> {
+    return this.http.put<Object>('https://272.selfip.net/apps/nxRNBp1Q5H/collections/locations/documents/locations1/', 
+    {
+      "key": "locations1",
+      "data": locationsJSON
+    }, this.httpOptions)
+  }
+
+  async addLocation(newLocation: any): Promise<any> {
+    return new Promise( (resolve, reject) => {
+      this.putLocationsObservable(newLocation)
+      .subscribe( (data:any) => {
+        resolve(data)
+      } )
+    } )
+  }
+
+  async updateLocationCount(location: string, count: number): Promise<any> {
+    for(let i = 0; i < this.locations.length; i++) {
+      if(this.locations[i].location === location) {
+        this.locations[i].count = count 
+      }
+    }
+    const locationsJSON: Object[] = []
+    this.locations.forEach( (location) => {
+      locationsJSON.push(JSON.stringify(location))
+    } )
+
+    return new Promise( (resolve, reject) => {
+      this.putLocationsCountObservable(locationsJSON)
+      .subscribe( (data:any) => {
+        resolve(data)
+      } )
+    } )
+  }
+
+  findLocation(location: string): any {
+    for(let i = 0; i < this.locations.length; i++) {
+      if(this.locations[i].location === location) {
+        return this.locations[i]
+      }
+    }
+    return null
+  }
+
+
 
 }
