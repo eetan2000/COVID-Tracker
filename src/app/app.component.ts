@@ -71,13 +71,14 @@ export class AppComponent implements AfterViewInit {
     }
   }
 
-  /*addMarker(event: any) {
-      var marker = L.marker([event.latitude, event.longitude]).addTo(this.map)
-      .bindPopup(`<b>${event.location}</b><br/>${event.count} pigs reported`)
-      marker.openPopup()
-      this.markerArray.set(event.pid, marker)
-  }*/
-
+  /**
+   * Adds a marker on the map
+   * @param id : id of case
+   * @param latitude 
+   * @param longitude 
+   * @param location 
+   * @param count : new count of the location
+   */
   addMarker = (id:number, latitude:number, longitude:number, location:string, count: number): void => {
     var marker = L.marker([latitude, longitude]).addTo(this.map)
     .bindPopup(`<b>${location}</b><br/>${count} cases reported`)
@@ -85,6 +86,10 @@ export class AppComponent implements AfterViewInit {
     this.markerArray.set(id, marker)
   }
 
+  /**
+   * Finds marker on the map and opens the popup
+   * @param id : id of case
+   */
   showMarker = (id: number): void => {
     this.markerArray.get(id).openPopup()
   }

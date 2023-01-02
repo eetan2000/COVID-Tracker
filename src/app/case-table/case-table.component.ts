@@ -177,6 +177,9 @@ export class CaseTableComponent implements OnInit{
     table.querySelector(`th:nth-child(${column + 1})`)!.classList.toggle("th-sort-des", !asc);
   }
 
+  /**
+   * Create case popup
+   */
   createCaseModal() {
     this.createModal = new bootstrap.Modal(document.getElementById("createModal"), {
       keyboard: false
@@ -184,6 +187,9 @@ export class CaseTableComponent implements OnInit{
     this.createModal?.show()
   }
 
+  /**
+   * Location popup
+   */
   createLocationModal() {
     var name = (document.getElementById("nameInput") as HTMLInputElement).value
     var phone = (document.getElementById("phoneInput") as HTMLInputElement).value
@@ -202,6 +208,9 @@ export class CaseTableComponent implements OnInit{
     }
   }
 
+  /**
+   * Logic function to handle location selecting
+   */
   addLocationInput() {
     var locationSelectElement = (document.getElementById("locationSelect") as HTMLSelectElement)
     var switchButton = document.getElementById("addLocationButton") as HTMLButtonElement
@@ -229,6 +238,9 @@ export class CaseTableComponent implements OnInit{
     this.showLocationInputs = !this.showLocationInputs
   }
 
+  /**
+   * Asynchronous call to add new case into REST server
+   */
   async addCase() {
     const name = (document.getElementById("nameInput") as HTMLInputElement).value
     const phone = (document.getElementById("phoneInput") as HTMLInputElement).value
