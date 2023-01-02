@@ -25,7 +25,9 @@
 }
 
 section {
-    text-align: center
+    text-align: center;
+    padding-bottom: 30px;
+    background-color: #18191a;
 }
 
 small {
@@ -53,7 +55,6 @@ form {
 .btn-block {
     width: 70%;
     margin-top: 10px;
-    margin-bottom: 10px;
     text-align: center;
 }
 
@@ -79,4 +80,8 @@ form {
 select {
     text-align: left;
     width: auto;
+}
+
+.table {
+    margin: 0;
 }

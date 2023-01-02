@@ -1,42 +1,31 @@
+* {
+    color: black;
+    background-color: #18191a;
+}
+
 header {
     padding: 10px;
+    background-color: #18191a;
 }
 
 header p {
     text-align: center;
     margin-top: 10px;
-    color: rgb(107, 107, 107);
+    color: rgb(193, 191, 191);
 }
 
 h1 {
+    padding-top: 20px;
     text-align: center;
+    color: aliceblue;
 }
 
 .map-section {
     text-align: center;
-    margin-bottom: 10px;
+    padding-bottom: 10px;
 }
 
 section {
-    text-align: center
-}
-
-.btn-block {
-    width: 70%;
-    margin-top: 10px;
-    margin-bottom: 10px;
     text-align: center;
-}
-
-.modal-footer {
-    display: block;
-    text-align: center;
-}
-
-.col-7 {
-    margin-bottom: 5px;
-}
-
-.col-4 {
-    margin-bottom: 5px;
+    background-color: #18191a;
 }
