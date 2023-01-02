@@ -383,6 +383,10 @@ export class CaseTableComponent implements OnInit{
     newRow.appendChild(deleteElement)
     tableBodyNode?.appendChild(newRow)
     this.locationModal?.hide()
+
+    document.querySelectorAll("input").forEach( (i) => {
+      i.value = ""
+    } )
   }
 
 }
