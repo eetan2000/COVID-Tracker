@@ -10,7 +10,7 @@
     <thead>
         <tr>
             <th class="sortable">Location</th>
-            <th class="sortable">Reported By</th>
+            <th class="sortable">Patient</th>
             <th class="sortable">Time Reported</th>
             <th></th>
             <th></th>
@@ -84,5 +84,25 @@
         </div>
       </form>
     </div>
+  </div>
+</div>
+
+<!-- More Info Modal -->
+<div class="modal fade" id="moreInfoModal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="modal-title">More Info</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <p><strong>Patient: </strong>{{name}}</p>
+              <p><strong>Contact: </strong>{{contact}}</p>
+              <p><strong>Reported Time: </strong>{{date}}</p>
+              <p><strong>Location: </strong>{{location}}</p>
+              <p><strong>ID: </strong>{{id}}</p>
+              <p><strong>Information: </strong>{{info}}</p>
+          </div>
+      </div>
   </div>
 </div>

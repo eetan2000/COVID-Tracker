@@ -14,9 +14,21 @@ export class CaseTableComponent implements OnInit{
   cases: Case[] = []
   locations: any[] = []
   @Input() showMarker!: (id: number) => void
+  @Input() addMarker!: (id:number, latitude:number, longitude:number, location:string, count: number) => void
   private createModal: Modal | undefined
   private locationModal: Modal | undefined
+  private moreModal: Modal | undefined
   showLocationInputs: boolean = false
+
+  //more info vars
+  name: string = ""
+  id: string = ""
+  contact: string = ""
+  date: string = ""
+  location: string = ""
+  info: string = ""
+  latitude: string = ""
+  longitude: string = ""
 
 
   constructor(private caseService: CaseServiceService) {  }
@@ -81,6 +93,42 @@ export class CaseTableComponent implements OnInit{
       locateButton.addEventListener("click", (event) => {
         this.showMarker(this.cases[i].getID())
         window.scrollTo(0,50)
+      })
+
+      moreInfoButton.addEventListener("click", (event) => {
+        this.moreModal = new bootstrap.Modal(document.getElementById("moreInfoModal"), {
+          keyboard: false
+        })
+        this.name = this.cases[i].getName()
+        this.contact = this.cases[i].getPhone()
+        this.id = this.cases[i].getID().toString()
+        this.location = this.cases[i].getLocation()
+        this.info = this.cases[i].getInfo()
+        this.date = this.cases[i].getDate()
+        this.moreModal?.show()
+      })
+
+      deleteButton.addEventListener("click", async (event) => {
+        this.location = this.cases[i].getLocation()
+        this.id = this.cases[i].getID().toString()
+        
+        if(this.cases.length === 1) {
+          await this.caseService.updateLocationCount(this.location, 0)
+          await this.caseService.deleteCase(parseInt(this.id))
+          tableBodyNode?.removeChild(tableBodyNode.firstElementChild as HTMLTableRowElement)
+        }
+        else {
+          var count
+          for(let i = 0; i < this.locations.length; i++) {
+            if(this.location === this.locations[i].location) {
+              count = this.locations[i].count
+            }
+          }
+          count--
+          await this.caseService.updateLocationCount(this.location, count)
+          await this.caseService.deleteCase(parseInt(this.id))
+          document.getElementById(this.id)?.remove()
+        }
       })
 
       newRow.appendChild(locationTd)
@@ -181,7 +229,7 @@ export class CaseTableComponent implements OnInit{
     this.showLocationInputs = !this.showLocationInputs
   }
 
-  addCase() {
+  async addCase() {
     const name = (document.getElementById("nameInput") as HTMLInputElement).value
     const phone = (document.getElementById("phoneInput") as HTMLInputElement).value
     const id = (document.getElementById("idInput") as HTMLInputElement).value
@@ -189,7 +237,7 @@ export class CaseTableComponent implements OnInit{
 
     //location logic
     const locationSelect = document.getElementById("locationSelect") as HTMLSelectElement
-    var location
+    var location = ""
     var latitude
     var longitude
     var count = 0
@@ -207,7 +255,7 @@ export class CaseTableComponent implements OnInit{
         "longitude": parseFloat(longitude),
         "count": 1
       }
-      this.caseService.addLocation(locationObject)
+      await this.caseService.addLocation(locationObject)
     }
     else {
       const locationObject = this.caseService.findLocation(locationSelect.value)
@@ -216,7 +264,7 @@ export class CaseTableComponent implements OnInit{
       longitude = locationObject.longitude
       count = locationObject.count + 1
       console.log(count)
-      this.caseService.updateLocationCount(location, count)
+      await this.caseService.updateLocationCount(location, count)
     }
     //
 
@@ -226,7 +274,9 @@ export class CaseTableComponent implements OnInit{
     const dateTime = date+' '+time;
 
     const newCase = new Case(name, phone, parseInt(id), location, dateTime, info)
-    this.caseService.addCase(newCase)
+    await this.caseService.addCase(newCase)
+    this.addMarker(parseInt(id),latitude,longitude,location,count)
+
 
     //add pig into table
     const newRow = document.createElement("tr")
@@ -267,6 +317,42 @@ export class CaseTableComponent implements OnInit{
     locateButton.addEventListener("click", (event) => {
       this.showMarker(parseInt(id))
       window.scrollTo(0,50)
+    })
+
+    moreInfoButton.addEventListener("click", (event) => {
+      this.moreModal = new bootstrap.Modal(document.getElementById("moreInfoModal"), {
+        keyboard: false
+      })
+      this.name = name
+      this.contact = phone
+      this.id = id
+      this.location = location
+      this.info = info
+      this.date = dateTime
+      this.moreModal?.show()
+    })
+
+    deleteButton.addEventListener("click", async (event) => {
+      this.location = location
+      this.id = id
+      
+      if(this.cases.length === 1) {
+        await this.caseService.updateLocationCount(this.location, 0)
+        await this.caseService.deleteCase(parseInt(this.id))
+        tableBodyNode?.removeChild(tableBodyNode.firstElementChild as HTMLTableRowElement)
+      }
+      else {
+        var count
+        for(let i = 0; i < this.locations.length; i++) {
+          if(this.location === this.locations[i].location) {
+            count = this.locations[i].count
+          }
+        }
+        count--
+        await this.caseService.updateLocationCount(this.location, count)
+        await this.caseService.deleteCase(parseInt(this.id))
+        document.getElementById(this.id)?.remove()
+      }
     })
     
     const tableBodyNode = document.getElementById("tbody")

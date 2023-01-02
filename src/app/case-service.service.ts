@@ -122,6 +122,38 @@ export class CaseServiceService {
     }, this.httpOptions)
   }
 
+  updateCaseObservable(casesJSON: Object[]): Observable<any> {
+    return this.http.put<Object>('https://272.selfip.net/apps/nxRNBp1Q5H/collections/cases/documents/cases1/', 
+    {
+      "key": "cases1",
+      "data": casesJSON
+    }, this.httpOptions)
+  }
+
+  async deleteCase(id:number): Promise<any> {
+    console.log(id)
+    for(let i = 0; i < this.cases.length; i++) {
+      if(this.cases[i].getID() === id) {
+        this.cases.splice(i, 1)
+      }
+    }
+    console.log(this.cases)
+
+
+    console.log(this.cases)
+    const casesJSON: Object[] = []
+    this.cases.forEach( (currentCase) => {
+      casesJSON.push(JSON.stringify(currentCase))
+    } )
+
+    return new Promise( (resolve, reject) => {
+      this.updateCaseObservable(casesJSON)
+      .subscribe( (data:any) => {
+        resolve(data)
+      } )
+    } )
+  }
+
   async addLocation(newLocation: any): Promise<any> {
     return new Promise( (resolve, reject) => {
       this.putLocationsObservable(newLocation)

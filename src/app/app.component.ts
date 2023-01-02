@@ -71,11 +71,18 @@ export class AppComponent implements AfterViewInit {
     }
   }
 
-  addMarker(event: any) {
+  /*addMarker(event: any) {
       var marker = L.marker([event.latitude, event.longitude]).addTo(this.map)
       .bindPopup(`<b>${event.location}</b><br/>${event.count} pigs reported`)
       marker.openPopup()
       this.markerArray.set(event.pid, marker)
+  }*/
+
+  addMarker = (id:number, latitude:number, longitude:number, location:string, count: number): void => {
+    var marker = L.marker([latitude, longitude]).addTo(this.map)
+    .bindPopup(`<b>${location}</b><br/>${count} cases reported`)
+    marker.openPopup()
+    this.markerArray.set(id, marker)
   }
 
   showMarker = (id: number): void => {
