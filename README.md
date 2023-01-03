@@ -9,7 +9,13 @@
 - Followed a Model-View-Controller Architecture
 - Used Object-Oriented Methodologies
 
-<img src="https://github.com/eetan2000/covid-tracker/blob/master/screenshots/Screenshot%20(365).png">
-
 # App Tour
+<img src="https://github.com/eetan2000/covid-tracker/blob/master/screenshots/Screenshot%20(365).png">
+<br>
+<img src="https://github.com/eetan2000/covid-tracker/blob/master/screenshots/Screenshot%20(369).png">
+<br>
+<img src="https://github.com/eetan2000/covid-tracker/blob/master/screenshots/Screenshot%20(368).png">
+<br>
+<img src="https://github.com/eetan2000/covid-tracker/blob/master/screenshots/Screenshot%20(370).png">
+
 ![alt-text](https://github.com/eetan2000/covid-tracker/blob/master/screenshots/CovidTracker.gif)
